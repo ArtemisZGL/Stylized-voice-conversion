@@ -8,11 +8,12 @@ import shutil
 
 app = Flask(__name__)
 
-
 @app.route('/audios', methods = ['POST'])
 def uploadAudio():
+    print(request.files)
     f = request.files["audio"]
     print(f)
+    #f = request.files["file"]
     target = request.headers.get("target")
     print(target)
 
@@ -32,6 +33,7 @@ def uploadAudio():
 
     shutil.rmtree(fileLocation + '/res')
     shutil.rmtree(fileLocation + '/chunks')
+
     return uuid4
 
 @app.route('/audios/<uuid>', methods = ['GET'])

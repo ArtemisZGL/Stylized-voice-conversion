@@ -24,7 +24,7 @@ class Segment():
 		# 分割 
 		print('开始按句分割')
 		#min_silence_len: 拆分语句时，静默满0.25秒则拆分。silence_thresh：小于-50dBFS以下的为静默。
-		chunks = split_on_silence(sound,min_silence_len=250,silence_thresh=-50)
+		chunks = split_on_silence(sound,min_silence_len=200,silence_thresh=-40)
 
 		# 创建保存目录
 		filepath = os.path.split(self.audioPath)[0]
@@ -78,7 +78,7 @@ class Segment():
 		for p in range(len(paths)):
 			path = paths[p]
 			song = mediainfo(path)
-			if (float(song['duration']) < 0.2):
+			if (float(song['duration']) < 0.5):
 				os.remove(path)
 
 		print("Over")
@@ -86,5 +86,6 @@ class Segment():
 		self.batchSize = len(paths)
 
 
-
+s = Segment('D:\\learn\\shixun\\appServer\\au.mp3', 'mp3')
+s.beginSegment()
 
